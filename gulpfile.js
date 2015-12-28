@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var gzip = require('gulp-gzip');
+var html = require('gulp-htmlmin');
 
 gulp.task('copy:css', function() {
   return gulp.src('./bower_components/Slate/dist/css/**/*.min.css')
@@ -28,6 +29,21 @@ gulp.task('gzip:js', ['copy:js'], function() {
 gulp.task('copy:fonts', function() {
   return gulp.src('./bower_components/Slate/dist/fonts/**/*.woff')
             .pipe(gulp.dest('./fonts'));
+});
+
+gulp.task('minify:html', function() {
+  return gulp.src('./index.html')
+            .pipe(html({
+                 removeComments: true,
+                 collapseWhitespace: true,
+                 collapseBooleanAttributes: true,
+                 // lint: true,
+                 minifyCSS: {
+                    keepSpecialComments: 0
+                },
+                minifyJS: true
+            }))
+            .pipe(gulp.dest('./'));
 });
 
 gulp.task('default', ['gzip:css', 'gzip:js', 'copy:fonts']);
