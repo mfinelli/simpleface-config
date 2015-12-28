@@ -46,4 +46,10 @@ gulp.task('minify:html', function() {
             .pipe(gulp.dest('./'));
 });
 
-gulp.task('default', ['gzip:css', 'gzip:js', 'copy:fonts']);
+gulp.task('gzip:html', ['minify:html'], function() {
+  return gulp.src('./index.html')
+            .pipe(gzip({ level: 9 }))
+            .pipe(gulp.dest('./'));
+});
+
+gulp.task('default', ['gzip:css', 'gzip:js', 'copy:fonts', 'gzip:html']);
