@@ -1,0 +1,19 @@
+{
+  "name": "simpleface-config",
+  "homepage": "https://github.com/mfinelli/simpleface-config",
+  "description": "Web configuration for pebble watchface simpleface.",
+  "main": "",
+  "moduleType": [],
+  "authors": [
+    "Mario Finelli"
+  ],
+  "license": "AGPL",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
