@@ -24,7 +24,7 @@ $(document).ready ->
     $('#forecastAPIKey').val(localStorage['forecastAPIKey'])
 
   $('#cancelButton').click ->
-    document.location = 'pebblejs://close'
+    document.location = getQueryParam('return_to', 'pebblejs://close')
   $('#submitButton').click ->
     return_to = getQueryParam('return_to', 'pebblejs://close#')
     return_val = encodeURIComponent(JSON.stringify(getConfigData()))
