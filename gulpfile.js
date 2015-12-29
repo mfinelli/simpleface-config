@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var gzip = require('gulp-gzip');
 var html = require('gulp-htmlmin');
 var jade = require('gulp-jade');
+var nano = require('gulp-cssnano');
 var sass = require('gulp-sass');
 
 var concat = require('gulp-concat');
@@ -28,7 +29,13 @@ gulp.task('combine:css', ['copy:css', 'sass'], function() {
             .pipe(gulp.dest('./web/css'));
 });
 
-gulp.task('gzip:css', ['combine:css'], function() {
+gulp.task('minify:css', ['combine:css'], function() {
+  return gulp.src('./web/css/**/*.css')
+            .pipe(nano())
+            .pipe(gulp.dest('./web/css'));
+});
+
+gulp.task('gzip:css', ['minify:css'], function() {
   return gulp.src('./web/css/**/*.css')
             .pipe(gzip({ level: 9 }))
             .pipe(gulp.dest('./web/css'));
