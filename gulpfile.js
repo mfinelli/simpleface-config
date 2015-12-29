@@ -77,4 +77,8 @@ gulp.task('gzip:html', ['minify:html'], function() {
             .pipe(gulp.dest('./web'));
 });
 
+gulp.task('clean', function() {
+  return del(['./web']);
+});
+
 gulp.task('default', ['gzip:css', 'gzip:js', 'copy:fonts', 'gzip:html']);
