@@ -7,29 +7,29 @@ var jade = require('gulp-jade');
 
 gulp.task('copy:css', function() {
   return gulp.src('./bower_components/Slate/dist/css/**/*.min.css')
-            .pipe(gulp.dest('./css'));
+            .pipe(gulp.dest('./web/css'));
 });
 
 gulp.task('gzip:css', ['copy:css'], function() {
-  return gulp.src('./css/**/*.css')
+  return gulp.src('./web/css/**/*.css')
             .pipe(gzip({ level: 9 }))
-            .pipe(gulp.dest('./css'));
+            .pipe(gulp.dest('./web/css'));
 });
 
 gulp.task('copy:js', function() {
   return gulp.src('./bower_components/Slate/dist/js/**/*.min.js')
-            .pipe(gulp.dest('./js'));
+            .pipe(gulp.dest('./web/js'));
 });
 
 gulp.task('gzip:js', ['copy:js'], function() {
-  return gulp.src('./js/**/*.js')
+  return gulp.src('./web/js/**/*.js')
             .pipe(gzip({ level: 9 }))
-            .pipe(gulp.dest('./js'));
+            .pipe(gulp.dest('./web/js'));
 });
 
 gulp.task('copy:fonts', function() {
   return gulp.src('./bower_components/Slate/dist/fonts/**/*.woff')
-            .pipe(gulp.dest('./fonts'));
+            .pipe(gulp.dest('./web/fonts'));
 });
 
 gulp.task('jade', function() {
@@ -38,8 +38,8 @@ gulp.task('jade', function() {
             .pipe(gulp.dest('./web'));
 });
 
-gulp.task('minify:html', function() {
-  return gulp.src('./index.html')
+gulp.task('minify:html', ['jade'], function() {
+  return gulp.src('./web/**/*.html')
             .pipe(html({
                  removeComments: true,
                  collapseWhitespace: true,
@@ -50,13 +50,13 @@ gulp.task('minify:html', function() {
                 },
                 minifyJS: true
             }))
-            .pipe(gulp.dest('./'));
+            .pipe(gulp.dest('./web/'));
 });
 
 gulp.task('gzip:html', ['minify:html'], function() {
-  return gulp.src('./index.html')
+  return gulp.src('./web/**/*.html')
             .pipe(gzip({ level: 9 }))
-            .pipe(gulp.dest('./'));
+            .pipe(gulp.dest('./web'));
 });
 
 gulp.task('default', ['gzip:css', 'gzip:js', 'copy:fonts', 'gzip:html']);
