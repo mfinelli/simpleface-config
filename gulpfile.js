@@ -7,6 +7,7 @@ var jade = require('gulp-jade');
 var nano = require('gulp-minify-css');
 var sass = require('gulp-sass');
 
+var coffee = require('gulp-coffee');
 var concat = require('gulp-concat');
 var del = require('del');
 var vinyl = require('vinyl-paths');
@@ -39,6 +40,12 @@ gulp.task('gzip:css', ['minify:css'], function() {
   return gulp.src('./web/css/**/*.css')
             .pipe(gzip({ level: 9 }))
             .pipe(gulp.dest('./web/css'));
+});
+
+gulp.task('coffee', function() {
+  return gulp.src('./*.coffee')
+            .pipe(coffee({ bare: true }))
+            .pipe(gulp.dest('./web/js'));
 });
 
 gulp.task('copy:js', function() {
