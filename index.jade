@@ -1,0 +1,29 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        title SimpleFace Configuration
+        link(rel='stylesheet', type='text/css',
+            href='css/slate.min.css')
+        script(src='js/slate.min.js')
+    body
+        h1.title SimpleFace Configuration
+        .item-container
+            .item-container-content
+                .item
+                    Use this page to customize the simpleface watchface.
+        .item-container
+            .item-container-header Forecast
+            .item-container-content
+                label.item API Key
+                    input(id='forecastAPIKey', type='text',
+                        placeholder='forecast.io API Key')
+            .item-container-footer
+                | Go to #[a(href='https://developer.forecast.io') forecast.io]
+                | to register and get your API key for free.
+        .item-container
+            .button-container
+                input(id='cancelButton', type='button', class='item-button'
+                    value='CANCEL')
+                input(id='submitButton', type='button', class='item-button'
+                    value='SAVE')
