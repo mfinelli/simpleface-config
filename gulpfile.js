@@ -11,6 +11,7 @@ var sort = require('gulp-sort');
 var coffee = require('gulp-coffee');
 var concat = require('gulp-concat');
 var del = require('del');
+var uglify = require('gulp-uglify');
 var vinyl = require('vinyl-paths');
 
 gulp.task('copy:css', function() {
@@ -62,7 +63,13 @@ gulp.task('combine:js', ['copy:js', 'coffee'], function() {
             .pipe(gulp.dest('./web/js'));
 });
 
-gulp.task('gzip:js', ['combine:js'], function() {
+gulp.task('minify:js', ['combine:js'], function() {
+  return gulp.src('./web/js/**/*.js')
+            .pipe(uglify({ mangle: false }))
+            .pipe(gulp.dest('./web/js'));
+});
+
+gulp.task('gzip:js', ['minify:js'], function() {
   return gulp.src('./web/js/**/*.js')
             .pipe(gzip({ level: 9 }))
             .pipe(gulp.dest('./web/js'));
