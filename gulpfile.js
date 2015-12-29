@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var gzip = require('gulp-gzip');
 var html = require('gulp-htmlmin');
+var jade = require('gulp-jade');
 
 gulp.task('copy:css', function() {
   return gulp.src('./bower_components/Slate/dist/css/**/*.min.css')
@@ -29,6 +30,12 @@ gulp.task('gzip:js', ['copy:js'], function() {
 gulp.task('copy:fonts', function() {
   return gulp.src('./bower_components/Slate/dist/fonts/**/*.woff')
             .pipe(gulp.dest('./fonts'));
+});
+
+gulp.task('jade', function() {
+  return gulp.src('./**/*.jade')
+            .pipe(jade())
+            .pipe(gulp.dest('./web'));
 });
 
 gulp.task('minify:html', function() {
