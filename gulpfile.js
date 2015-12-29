@@ -6,6 +6,7 @@ var html = require('gulp-htmlmin');
 var jade = require('gulp-jade');
 var nano = require('gulp-minify-css');
 var sass = require('gulp-sass');
+var sort = require('gulp-sort');
 
 var coffee = require('gulp-coffee');
 var concat = require('gulp-concat');
@@ -55,6 +56,7 @@ gulp.task('copy:js', function() {
 
 gulp.task('combine:js', ['copy:js', 'coffee'], function() {
   return gulp.src('./web/js/**/*.js')
+            .pipe(sort({ asc: false }))
             .pipe(vinyl(del))
             .pipe(concat('scripts.js'))
             .pipe(gulp.dest('./web/js'));
