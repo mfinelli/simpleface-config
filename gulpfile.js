@@ -17,7 +17,7 @@ gulp.task('copy:css', function() {
 });
 
 gulp.task('sass', function() {
-  return gulp.src('./sass/**/*.scss')
+  return gulp.src('./*.scss')
             .pipe(sass())
             .pipe(gulp.dest('./web/css'));
 });
@@ -58,7 +58,7 @@ gulp.task('copy:fonts', function() {
 });
 
 gulp.task('jade', function() {
-  return gulp.src('./**/*.jade')
+  return gulp.src('./*.jade')
             .pipe(jade())
             .pipe(gulp.dest('./web'));
 });
