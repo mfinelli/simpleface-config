@@ -6,6 +6,10 @@ var html = require('gulp-htmlmin');
 var jade = require('gulp-jade');
 var sass = require('gulp-sass');
 
+var concat = require('gulp-concat');
+var del = require('del');
+var vinyl = require('vinyl-paths');
+
 gulp.task('copy:css', function() {
   return gulp.src('./bower_components/Slate/dist/css/**/*.min.css')
             .pipe(gulp.dest('./web/css'));
@@ -17,7 +21,14 @@ gulp.task('sass', function() {
             .pipe(gulp.dest('./web/css'));
 });
 
-gulp.task('gzip:css', ['copy:css', 'sass'], function() {
+gulp.task('combine:css', ['copy:css', 'sass'], function() {
+  return gulp.src('./web/css/**/*.css')
+            .pipe(vinyl(del))
+            .pipe(concat('default.css'))
+            .pipe(gulp.dest('./web/css'));
+});
+
+gulp.task('gzip:css', ['combine:css'], function() {
   return gulp.src('./web/css/**/*.css')
             .pipe(gzip({ level: 9 }))
             .pipe(gulp.dest('./web/css'));
