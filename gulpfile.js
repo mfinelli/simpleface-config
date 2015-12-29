@@ -53,7 +53,14 @@ gulp.task('copy:js', function() {
             .pipe(gulp.dest('./web/js'));
 });
 
-gulp.task('gzip:js', ['copy:js'], function() {
+gulp.task('combine:js', ['copy:js', 'coffee'], function() {
+  return gulp.src('./web/js/**/*.js')
+            .pipe(vinyl(del))
+            .pipe(concat('scripts.js'))
+            .pipe(gulp.dest('./web/js'));
+});
+
+gulp.task('gzip:js', ['combine:js'], function() {
   return gulp.src('./web/js/**/*.js')
             .pipe(gzip({ level: 9 }))
             .pipe(gulp.dest('./web/js'));
