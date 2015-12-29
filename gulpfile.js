@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var gzip = require('gulp-gzip');
 var html = require('gulp-htmlmin');
 var jade = require('gulp-jade');
-var nano = require('gulp-cssnano');
+var nano = require('gulp-minify-css');
 var sass = require('gulp-sass');
 
 var concat = require('gulp-concat');
