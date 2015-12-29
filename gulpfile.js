@@ -4,13 +4,20 @@ var gulp = require('gulp');
 var gzip = require('gulp-gzip');
 var html = require('gulp-htmlmin');
 var jade = require('gulp-jade');
+var sass = require('gulp-sass');
 
 gulp.task('copy:css', function() {
   return gulp.src('./bower_components/Slate/dist/css/**/*.min.css')
             .pipe(gulp.dest('./web/css'));
 });
 
-gulp.task('gzip:css', ['copy:css'], function() {
+gulp.task('sass', function() {
+  return gulp.src('./sass/**/*.scss')
+            .pipe(sass())
+            .pipe(gulp.dest('./web/css'));
+});
+
+gulp.task('gzip:css', ['copy:css', 'sass'], function() {
   return gulp.src('./web/css/**/*.css')
             .pipe(gzip({ level: 9 }))
             .pipe(gulp.dest('./web/css'));
