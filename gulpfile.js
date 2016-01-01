@@ -83,7 +83,7 @@ gulp.task('copy:fonts', function() {
 });
 
 gulp.task('jade', function() {
-  return gulp.src('./*.jade')
+  return gulp.src('./index.jade')
             .pipe(jade())
             .pipe(gulp.dest('./web'));
 });
