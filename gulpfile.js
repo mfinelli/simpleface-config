@@ -15,6 +15,8 @@ var uglify = require('gulp-uglify');
 var vinyl = require('vinyl-paths');
 var shell = require('gulp-shell');
 var favicon = require('gulp-real-favicon');
+var optipng = require('imagemin-optipng');
+var svgo = require('imagemin-svgo');
 
 gulp.task('copy:css', function() {
   return gulp.src('./bower_components/Slate/dist/css/**/*.min.css')
@@ -161,10 +163,32 @@ gulp.task('favicon:clean', ['favicon:generate'], function() {
   return del(['favicon.png', 'faviconData.json']);
 });
 
+gulp.task('favicon:optimize:png', ['favicon:generate'], function() {
+  return gulp.src('./web/**/*.png')
+            .pipe(optipng({ optimizationLevel: 3 })())
+            .pipe(gulp.dest('./web'));
+});
+
+gulp.task('favicon:optimize:svg', ['favicon:generate'], function() {
+  return gulp.src('./web/**/*.svg')
+            .pipe(svgo()())
+            .pipe(gulp.dest('./web'));
+});
+
+gulp.task('gzip:other', ['favicon:generate'], function() {
+  return gulp.src(['./web/manifest.json', './web/browserconfig.xml'])
+            .pipe(gzip({ level: 9 }))
+            .pipe(gulp.dest('./web'));
+});
+
+gulp.task('favicon',
+  ['favicon:clean', 'favicon:optimize:png', 'favicon:optimize:svg']
+);
+
 gulp.task('clean', function() {
   return del(['./web']);
 });
 
 gulp.task('default',
-  ['gzip:css', 'gzip:js', 'copy:fonts', 'gzip:html', 'favicon:clean']
+  ['gzip:css', 'gzip:js', 'copy:fonts', 'gzip:html', 'favicon', 'gzip:other']
 );
