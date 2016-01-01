@@ -185,10 +185,23 @@ gulp.task('favicon',
   ['favicon:clean', 'favicon:optimize:png', 'favicon:optimize:svg']
 );
 
+gulp.task('robots', function() {
+  return gulp.src('./robots.txt')
+            .pipe(gulp.dest('./web'));
+});
+
 gulp.task('clean', function() {
   return del(['./web']);
 });
 
 gulp.task('default',
-  ['gzip:css', 'gzip:js', 'copy:fonts', 'gzip:html', 'favicon', 'gzip:other']
+  [
+    'gzip:css',
+    'gzip:js',
+    'copy:fonts',
+    'gzip:html',
+    'favicon',
+    'gzip:other',
+    'robots'
+  ]
 );
