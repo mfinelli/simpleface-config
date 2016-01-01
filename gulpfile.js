@@ -14,6 +14,7 @@ var del = require('del');
 var uglify = require('gulp-uglify');
 var vinyl = require('vinyl-paths');
 var shell = require('gulp-shell');
+var favicon = require('gulp-real-favicon');
 
 gulp.task('copy:css', function() {
   return gulp.src('./bower_components/Slate/dist/css/**/*.min.css')
@@ -112,8 +113,58 @@ gulp.task('favicon:export', shell.task([
   'convert -flatten -background none favicon.xcf favicon.png'
 ]));
 
+gulp.task('favicon:generate', ['favicon:export'], function(done) {
+  favicon.generateFavicon({
+    masterPicture: 'favicon.png',
+    dest: './web',
+    iconsPath: '/',
+    design: {
+      ios: {
+        pictureAspect: 'noChange',
+        appName: 'SimpleFace Configuration'
+      },
+      desktopBrowser: {},
+      windows: {
+        pictureAspect: 'whiteSilhouette',
+        backgroundColor: '#da532c',
+        onConflict: 'override',
+        appName: 'SimpleFace Configuration'
+      },
+      androidChrome: {
+        pictureAspect: 'shadow',
+        themeColor: '#000000',
+        manifest: {
+          name: 'SimpleFace Configuration',
+          startUrl: 'https://simpleface.watch',
+          display: 'standalone',
+          orientation: 'portrait',
+          onConflict: 'override'
+        }
+      },
+      safariPinnedTab: {
+        pictureAspect: 'blackAndWhite',
+        threshold: 50,
+        themeColor: '#5bbad5'
+      }
+    },
+    settings: {
+      scalingAlgorithm: 'Mitchell',
+      errorOnImageTooSmall: false
+    },
+    markupFile: 'faviconData.json'
+  }, function() {
+    done();
+  });
+});
+
+gulp.task('favicon:clean', ['favicon:generate'], function() {
+  return del(['favicon.png', 'faviconData.json']);
+});
+
 gulp.task('clean', function() {
   return del(['./web']);
 });
 
-gulp.task('default', ['gzip:css', 'gzip:js', 'copy:fonts', 'gzip:html']);
+gulp.task('default',
+  ['gzip:css', 'gzip:js', 'copy:fonts', 'gzip:html', 'favicon:clean']
+);
