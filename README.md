@@ -17,6 +17,10 @@ We also use [bower](http://bower.io) to fetch front-end dependencies.
 Specifically we use the pebble developed
 [slate](https://github.com/pebble/slate) project.
 
+The favicon is created with the [GIMP](https://www.gimp.org) and we need
+[imagemagick](http://imagemagick.org) to convert it to a PNG image before
+sending it to [real favicon generator](https://realfavicongenerator.net).
+
 ## Usage
 
 First install the node dependencies:

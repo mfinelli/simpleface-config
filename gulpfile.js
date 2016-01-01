@@ -13,6 +13,7 @@ var concat = require('gulp-concat');
 var del = require('del');
 var uglify = require('gulp-uglify');
 var vinyl = require('vinyl-paths');
+var shell = require('gulp-shell');
 
 gulp.task('copy:css', function() {
   return gulp.src('./bower_components/Slate/dist/css/**/*.min.css')
@@ -106,6 +107,10 @@ gulp.task('gzip:html', ['minify:html'], function() {
             .pipe(gzip({ level: 9 }))
             .pipe(gulp.dest('./web'));
 });
+
+gulp.task('favicon:export', shell.task([
+  'convert -flatten -background none favicon.xcf favicon.png'
+]));
 
 gulp.task('clean', function() {
   return del(['./web']);
