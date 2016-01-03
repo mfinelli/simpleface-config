@@ -1,5 +1,7 @@
 # SimpleFace Config
 
+[![Build Status](https://travis-ci.org/mfinelli/simpleface-config.svg?branch=master)](https://travis-ci.org/mfinelli/simpleface-config)
+
 Website to configure the [simpleface](https://github.com/mfinelli/simpleface)
 [pebble](https://www.pebble.com) watchface.
 
