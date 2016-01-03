@@ -22,6 +22,15 @@ html
                 | Go to #[a(href='https://developer.forecast.io') forecast.io]
                 | to register and get your API key for free.
         .item-container
+            .item-container-header Temperature Units
+            .item-container-content
+                label.item US
+                    input(id='unitsUSA', type='radio', class='item-radio',
+                        name='units', value='us', checked)
+                label.item Metric
+                    input(id='unitsMetric', type='radio', class='item-radio',
+                        name='units', value='si')
+        .item-container
             .button-container
                 input(id='cancelButton', type='button', class='item-button'
                     value='CANCEL')
