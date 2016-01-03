@@ -13,11 +13,13 @@ getQueryParam = (variable, defaultValue) ->
 getConfigData = () ->
   options = {
     forecastAPIKey: $('#forecastAPIKey').val(),
-    forecastUnits: $('input[name=units]:checked').val()
+    forecastUnits: $('input[name=units]:checked').val(),
+    forecastLanguage: $('#weatherLanguage').val()
   }
 
   localStorage['forecastAPIKey'] = options.forecastAPIKey
   localStorage['forecastUnits'] = options.forecastUnits
+  localStorage['forecastLanguage'] = options.forecastLanguage
 
   options
 
@@ -29,6 +31,9 @@ $(document).ready ->
     $('#unitsMetric').attr('checked', true)
   else
     $('#unitsUSA').attr('checked', true)
+
+  if localStorage['forecastLanguage']
+    $('#weatherLanguage').val(localStorage['forecastLanguage'])
 
   $('#cancelButton').click ->
     document.location = getQueryParam('return_to', 'pebblejs://close')

@@ -31,6 +31,48 @@ html
                     input(id='unitsMetric', type='radio', class='item-radio',
                         name='units', value='si')
         .item-container
+            .item-container-header Weather Language
+            .item-container-content
+                label.item Language
+                    select(id='weatherLanguage', class='item-select')
+                        option(value='ar', class='item-select-option')
+                            | العربية
+                        option(value='bs', class='item-select-option')
+                            | босански
+                        option(value='de', class='item-select-option')
+                            | Deutsch
+                        option(value='el', class='item-select-option')
+                            | ελληνικά
+                        option(value='en', class='item-select-option',
+                            selected)
+                            | English
+                        option(value='es', class='item-select-option')
+                            | español
+                        option(value='fr', class='item-select-option')
+                            | français
+                        option(value='hr', class='item-select-option')
+                            | hrvatski
+                        option(value='it', class='item-select-option')
+                            | italiano
+                        option(value='nl', class='item-select-option')
+                            | Nederlands
+                        option(value='pl', class='item-select-option')
+                            | polski
+                        option(value='pt', class='item-select-option')
+                            | português
+                        option(value='ru', class='item-select-option')
+                            | русский
+                        option(value='sk', class='item-select-option')
+                            | slovenčina
+                        option(value='sv', class='item-select-option')
+                            | svenska
+                        option(value='tr', class='item-select-option')
+                            | Türkçe
+                        option(value='uk', class='item-select-option')
+                            | українська
+                        option(value='zh', class='item-select-option')
+                            | 中文
+        .item-container
             .button-container
                 input(id='cancelButton', type='button', class='item-button',
                     value='CANCEL')
